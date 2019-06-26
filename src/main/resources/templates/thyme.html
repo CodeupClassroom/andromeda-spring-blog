@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Thyme Test</title>
+</head>
+<body>
+
+    <!-- The purpose of "World" here is to have placeholder text when viewing
+    the HTML in the browser without building it server side first. -->
+    <h1>Hello <span th:text="${name}">World</span></h1>
+
+    <h1>Greetings, <th:block th:text="${username}" /></h1>
+
+    <h3>Username is
+        <span th:text="${person.name}"></span>
+        and their age is
+        <span th:text="${person.age}"></span>
+    </h3>
+
+    <ul th:each="number : ${numbers}">
+        <li th:text="${number}"></li>
+    </ul>
+
+    <th:block th:each="number : ${numbers}">
+        <div th:if="${number != 2}" class="card">
+            <h2 th:text="${number}"></h2>
+        </div>
+    </th:block>
+
+</body>
+</html>
