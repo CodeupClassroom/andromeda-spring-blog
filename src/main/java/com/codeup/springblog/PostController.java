@@ -1,18 +1,30 @@
 package com.codeup.springblog;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 public class PostController {
 
+    // represents our data base query
+    private List<Post> getPosts() {
+        return Arrays.asList(
+                new Post("Post 1", "Some cool stuff 1."),
+                new Post("Post 2", "Some cool stuff 2."),
+                new Post("Post 3", "Some cool stuff 3."));
+    }
+
     @GetMapping("/posts")
-    @ResponseBody
-    public String index() {
-        return "List of posts...";
+    public String index(Model model) {
+        model.addAttribute("posts", getPosts());
+        return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
@@ -32,6 +44,7 @@ public class PostController {
     public void insert() {
 
     }
+
 
 
 
