@@ -1,4 +1,4 @@
-package com.codeup.springblog;
+package com.codeup.springblog.models;
 
 import javax.persistence.*;
 
@@ -19,6 +19,12 @@ public class Ad {
     private int priceInCents;
 
     public Ad() {
+    }
+
+    public Ad(String title, String description, int priceInCents) {
+        this.title = title;
+        this.description = description;
+        this.priceInCents = priceInCents;
     }
 
     public long getId() {

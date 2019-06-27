@@ -1,5 +1,6 @@
-package com.codeup.springblog;
+package com.codeup.springblog.repos;
 
+import com.codeup.springblog.models.Ad;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
