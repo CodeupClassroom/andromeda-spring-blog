@@ -46,5 +46,11 @@ public class AdController {
         return "redirect:/ads-view";
     }
 
+    @GetMapping("/ad-view-categories")
+    private String viewCategoriesOnAd(Model model) {
+        model.addAttribute("categories", adsDao.findOne(1L).getCategories());
+        return "ads/listOfCategories";
+    }
+
 
 }

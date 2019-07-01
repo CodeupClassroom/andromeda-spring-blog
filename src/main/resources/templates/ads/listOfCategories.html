@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head('View Ads')">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+</head>
+<body>
+
+<nav th:replace="partials/navbar :: nav"></nav>
+
+<header th:replace="partials/header :: header('All Ads!')"></header>
+
+<main class="container">
+        <h3>Here are the categories for the ad:</h3>
+    <ul>
+        <!--/*@thymesVar id="categories" type="com.codeup.springblog.models.AdCategory"*/-->
+        <li th:each="category : ${categories}" th:text="${category.name}" />
+    </ul>
+
+</main>
+
+<th:block th:include="partials/scripts :: scripts" />
+
+</body>
+</html>
