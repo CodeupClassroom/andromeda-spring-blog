@@ -12,8 +12,9 @@
 
     <main class="container">
         <th:block th:each="post : ${posts}">
-            <div class="card">
-                <h3 class="text-center" th:text="${post.title}">Post</h3>
+            <div class="card p-1">
+                <!--/* Thymeleaf has several built-in string utility functions like capitalizeWords */-->
+                <h3 th:text="${#strings.capitalizeWords(post.title)}">Post</h3>
                 <p th:text="${post.body}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus accusantium alias aliquid architecto eligendi, excepturi explicabo libero maiores non numquam quae recusandae, sapiente suscipit, unde vero voluptatibus! Officiis, temporibus.</p>
             </div>
         </th:block>
