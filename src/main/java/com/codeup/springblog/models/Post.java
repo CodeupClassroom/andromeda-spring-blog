@@ -1,9 +1,6 @@
 package com.codeup.springblog.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "posts")
@@ -17,12 +14,21 @@ public class Post {
 
     private String body;
 
+    @ManyToOne
+    private User author;
+
     public Post() {
     }
 
     public Post(String title, String body) {
         this.title = title;
         this.body = body;
+    }
+
+    public Post(String title, String body, User author) {
+        this.title = title;
+        this.body = body;
+        this.author = author;
     }
 
     public Post(long id, String title, String body) {
@@ -53,5 +59,13 @@ public class Post {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }
