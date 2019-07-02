@@ -35,22 +35,21 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    public String create() {
+    public String create(Model model) {
+        model.addAttribute("post", new Post());
         return "posts/create";
     }
 
     @PostMapping("/posts/create")
-    public String insert(@RequestParam String title, @RequestParam String body) {
+    public String insert(@ModelAttribute Post post) {
         User author = userDao.findOne(1L);
-        Post newPost = new Post(title, body, author);
-        postDao.save(newPost);
+        post.setAuthor(author);
+        postDao.save(post);
         return "redirect:/posts";
     }
 
     @GetMapping("/posts/{id}/edit")
     public String edit(@PathVariable long id, Model model) {
-        Post post = postDao.findOne(id);
-        System.out.println(post);
         model.addAttribute("post", postDao.findOne(id));
         return "posts/edit";
     }
@@ -58,14 +57,9 @@ public class PostController {
     @PostMapping("/posts/{id}/edit")
     public String update(
             @PathVariable long id,
-            @RequestParam String title,
-            @RequestParam String body) {
-
-        Post original = postDao.findOne(id);
-        Post postToEdit = new Post(id, title, body);
-        postToEdit.setAuthor(original.getAuthor());
-
-        postDao.save(postToEdit);
+            @ModelAttribute Post post) {
+        post.setAuthor(postDao.findOne(id).getAuthor());
+        postDao.save(post);
         return "redirect:/posts";
     }
 
