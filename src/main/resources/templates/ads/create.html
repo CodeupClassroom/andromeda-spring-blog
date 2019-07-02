@@ -9,16 +9,17 @@
 
     <h1>Create Ad</h1>
 
-    <form action="/ads/create" method="post">
+    <form th:action="@{/ads/create}" th:method="post" th:object="${ad}">
         Title:
-        <input name="title" />
+        <input type="text" th:field="*{title}" />
         <br />
         Description:
-        <input name="description" />
+        <input type="text" th:field="*{description}" />
         <br />
         Price In Cents:
-        <input type="number" name="priceInCents" />
+        <input type="number" th:field="*{priceInCents}" />
         <br />
+        <input type="text" name="extra" />
         <input type="submit" />
     </form>
 

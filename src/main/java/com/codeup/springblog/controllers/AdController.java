@@ -4,10 +4,7 @@ import com.codeup.springblog.models.Ad;
 import com.codeup.springblog.repos.AdRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AdController {
@@ -26,17 +23,15 @@ public class AdController {
     }
 
     @GetMapping("/ads/create")
-    private String create() {
+    private String create(Model model) {
+        model.addAttribute("ad", new Ad());
         return "ads/create";
     }
 
     @PostMapping("/ads/create")
-    private String insert(
-            @RequestParam String title,
-            @RequestParam String description,
-            @RequestParam int priceInCents) {
-        Ad adToInsert = new Ad(title, description, priceInCents);
-        adsDao.save(adToInsert);
+    private String insert(@ModelAttribute Ad ad, @RequestParam String extra) {
+        System.out.println(extra);
+        adsDao.save(ad);
         return "redirect:/ads";
     }
 
