@@ -4,6 +4,7 @@ import com.codeup.springblog.models.Post;
 import com.codeup.springblog.models.User;
 import com.codeup.springblog.repos.PostRepository;
 import com.codeup.springblog.repos.UserRepository;
+import com.codeup.springblog.services.StringService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +14,12 @@ public class PostController {
 
     private PostRepository postDao;
     private UserRepository userDao;
+    private StringService strSvc;
 
-    public PostController(PostRepository postDao, UserRepository userDao) {
+    public PostController(PostRepository postDao, UserRepository userDao, StringService strSvc) {
         this.postDao = postDao;
         this.userDao = userDao;
+        this.strSvc = strSvc;
     }
 
     @GetMapping("/posts")
@@ -55,6 +58,7 @@ public class PostController {
     public String update(
             @PathVariable long id,
             @ModelAttribute Post post) {
+        post.setAuthor(postDao.findOne(id).getAuthor());
         postDao.save(post);
         return "redirect:/posts";
     }
@@ -63,6 +67,12 @@ public class PostController {
     public String delete(@PathVariable long id) {
         postDao.delete(id);
         return "redirect:/posts";
+    }
+
+    @GetMapping("/test-service/{str}")
+    @ResponseBody
+    public String testService(@PathVariable String str) {
+        return strSvc.returnInCaps(str);
     }
 
 
