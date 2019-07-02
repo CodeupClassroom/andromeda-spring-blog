@@ -61,7 +61,10 @@ public class PostController {
             @RequestParam String title,
             @RequestParam String body) {
 
+        Post original = postDao.findOne(id);
         Post postToEdit = new Post(id, title, body);
+        postToEdit.setAuthor(original.getAuthor());
+
         postDao.save(postToEdit);
         return "redirect:/posts";
     }
