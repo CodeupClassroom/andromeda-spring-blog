@@ -18,15 +18,9 @@ public class AdController {
         this.adsDao = adsDao;
     }
 
+
     @GetMapping("/ads")
-    @ResponseBody
-    private Iterable<String> index() {
-        return adsDao.getTitleWithGreatLengthNative();
-    }
-
-
-    @GetMapping("/ads-view")
-    private String indexView(Model model) {
+    private String index(Model model) {
         model.addAttribute("ads", adsDao.findAll());
         return "ads/index";
     }
@@ -43,7 +37,7 @@ public class AdController {
             @RequestParam int priceInCents) {
         Ad adToInsert = new Ad(title, description, priceInCents);
         adsDao.save(adToInsert);
-        return "redirect:/ads-view";
+        return "redirect:/ads";
     }
 
 

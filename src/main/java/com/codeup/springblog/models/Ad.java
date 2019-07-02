@@ -11,7 +11,7 @@ public class Ad {
     @Column(columnDefinition = "INT unsigned NOT NULL AUTO_INCREMENT")
     private long id;
 
-    @Column(nullable = false, unique = true, length = 300)
+    @Column(nullable = false, length = 300)
     private String title;
 
     private String description;
