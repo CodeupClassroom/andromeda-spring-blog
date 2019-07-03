@@ -22,6 +22,17 @@ public class User {
     @OneToMany(mappedBy = "author")
     private List<Post> posts;
 
+    public User() {
+    }
+
+    public User(User copy) {
+        this.id = copy.id;
+        this.username = copy.username;
+        this.password = copy.password;
+        this.email = copy.email;
+        this.posts = copy.posts;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -44,5 +55,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }
